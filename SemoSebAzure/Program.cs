@@ -1,3 +1,6 @@
+using Azure.Messaging.ServiceBus;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Specialized;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using SemoSebAzure.Db;
@@ -13,6 +16,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<SebContext>(
     b => b.UseSqlServer(builder.Configuration.GetConnectionString("Main"))
 );
+
+builder.Services.AddScoped(_ => new BlobContainerClient(builder.Configuration.GetConnectionString("Blob"), "images"));
+
+builder.Services.AddScoped(_ => new ServiceBusClient(builder.Configuration.GetConnectionString("ServiceBus")));
 
 var app = builder.Build();
 

@@ -3,9 +3,7 @@
 namespace SemoSebAzure.Dto
 {
     public record ProductRequest(
-        [property: Required]
         string Name,
-        [property: Required]
         IFormFile Image
     );
 }
