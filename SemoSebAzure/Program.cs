@@ -14,11 +14,9 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-Console.WriteLine(builder.Configuration.GetConnectionString("Main"));
-
-builder.Services.AddDbContext<SebContext>(
-    b => b.UseSqlServer(builder.Configuration.GetConnectionString("Main"))
-);
+//builder.Services.AddDbContext<SebContext>(
+//    b => b.UseSqlServer(builder.Configuration.GetConnectionString("Main"))
+//);
 
 builder.Services.AddScoped(_ => new BlobContainerClient(builder.Configuration.GetConnectionString("Blob"), "images"));
 
