@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Messaging.ServiceBus;
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Mvc;
+using SemoSebAzure.Db;
 
 namespace SemoSebAzure.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController(
-        //SebContext _db,
-        //BlobContainerClient _blobContainerClient,
-        //ServiceBusClient _serviceBusClient
+        SebContext _db,
+        BlobContainerClient _blobContainerClient,
+        ServiceBusClient _serviceBusClient
     ) : ControllerBase
     {
         //[HttpPost]
