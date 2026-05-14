@@ -8,9 +8,10 @@ namespace SemoSebAzure.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController(
-        SebContext _db,
-        BlobContainerClient _blobContainerClient,
-        ServiceBusClient _serviceBusClient
+        //SebContext _db,
+        //BlobContainerClient _blobContainerClient,
+        //ServiceBusClient _serviceBusClient
+        IConfiguration config
     ) : ControllerBase
     {
         //[HttpPost]
@@ -72,7 +73,11 @@ namespace SemoSebAzure.Controllers
         [HttpGet]
         public async Task<IActionResult> Test()
         {
-            return Ok(new { Value = 42 });
+            return Ok(new { 
+                Value1 = config.GetConnectionString("Main"),
+                Value2 = config.GetConnectionString("Blob"),
+                Value3 = config.GetConnectionString("ServiceBus"),
+            });
         }
     }
 }
