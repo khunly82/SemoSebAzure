@@ -20,12 +20,12 @@ jobs:
             - name: Build
               run: dotnet build --configuration release
             - name: Publish
-              run: dotnet publish --output /publish --configuration release 
+              run: dotnet publish --output ./publish --configuration release 
             - name: Upload Artifact
               uses: actions/upload-artifact@v7
               with:
                 name: build
-                path: /publish
+                path: ./publish
 
     deploy:
         runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
               uses: actions/download-artifact@v8
               with:
                 name: build
-                path: /publish
+                path: ./publish
             - name: Login Azure
               uses: azure/login@v3
               with:
@@ -44,4 +44,4 @@ jobs:
               uses: azure/webapps-deploy@v2
               with:
                 app-name: seb-asp-2026
-                package: /publish
+                package: ./publish
