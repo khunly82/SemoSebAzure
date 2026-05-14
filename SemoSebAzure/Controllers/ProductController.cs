@@ -73,15 +73,5 @@ namespace SemoSebAzure.Controllers
             }
             return File(await blobClient.OpenReadAsync(), blobClient.GetProperties().Value.ContentType);
         }
-
-        public IActionResult Test()
-        {
-            return Ok(new
-            {
-                Main = config.GetConnectionString("Main"),
-                Blob = config.GetConnectionString("Blob"),
-                Bus = config.GetConnectionString("ServiceBus"),
-            });
-        }
     }
 }
