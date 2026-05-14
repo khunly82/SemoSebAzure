@@ -24,8 +24,8 @@ namespace SemoSebAzure.Controllers
         )
         {
             var p = new Product { Name = request.Name };
-            var added = _db.Add(p).Entity;
-            await _db.SaveChangesAsync();
+            //var added = _db.Add(p).Entity;
+            //await _db.SaveChangesAsync();
 
             var stream = new MemoryStream();
             await request.Image.CopyToAsync(stream);
