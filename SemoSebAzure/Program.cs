@@ -4,6 +4,7 @@ using Azure.Storage.Blobs.Specialized;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using SemoSebAzure.Db;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+Console.WriteLine(builder.Configuration.GetConnectionString("Main"));
+
 builder.Services.AddDbContext<SebContext>(
     b => b.UseSqlServer(builder.Configuration.GetConnectionString("Main"))
 );
@@ -21,12 +24,18 @@ builder.Services.AddScoped(_ => new BlobContainerClient(builder.Configuration.Ge
 
 builder.Services.AddScoped(_ => new ServiceBusClient(builder.Configuration.GetConnectionString("ServiceBus")));
 
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
+
 var app = builder.Build();
 
 app.MapOpenApi();
 app.MapScalarApiReference();
 
 app.UseAuthorization();
+
 
 app.MapControllers();
 
