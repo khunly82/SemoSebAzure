@@ -13,7 +13,7 @@ namespace SemoSebAzure.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController(
-        SebContext _db,
+        //SebContext _db,
         BlobContainerClient _blobContainerClient,
         ServiceBusClient _serviceBusClient
     ) : ControllerBase
@@ -25,6 +25,7 @@ namespace SemoSebAzure.Controllers
         {
             var p = new Product { Name = request.Name };
             //var added = _db.Add(p).Entity;
+            var added = p;
             //await _db.SaveChangesAsync();
 
             var stream = new MemoryStream();
