@@ -73,5 +73,12 @@ namespace SemoSebAzure.Controllers
             }
             return File(await blobClient.OpenReadAsync(), blobClient.GetProperties().Value.ContentType);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Test()
+        {
+            return Ok(new { Value = 42 });
+        }
     }
 }
